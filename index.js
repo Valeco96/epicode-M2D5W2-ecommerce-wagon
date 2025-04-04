@@ -98,7 +98,7 @@ function checkout(prices) {
   console.log("Il totale del tuo acquisto e'" + cartTotal + "$");
 
   //Applica sconto agli utenti ambassador
-  if (utenteCheEffettuaLAcquisto) {
+  if (utenti[utenteCheEffettuaLAcquisto]) {
     console.log("Bentornato/a! Applico uno sconto del 30%!");
     cartTotal = cartTotal * 30 - 100;
   } else {
