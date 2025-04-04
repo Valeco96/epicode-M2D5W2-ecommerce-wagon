@@ -16,6 +16,12 @@ ES. L'utente Marco Rossi e' un ambassador, quindi la frase dovrebbe essere "Marc
 Infine, crea un SECONDO array in cui inserirai SOLO gli ambassador.
 */
 
+//1. Somma dei prezzi di un carrello (prices) - funzione per calcolo + loop for
+//2. Aggiungi alla somma il costo di spedizione, e se il costo e' inferiore o uguale a 100 - condizione
+//3. Crea una nuova lista di utenti e un nuovo array con tutti gli utenti inclusi nello sconto isAmbassador
+//4. Applica uno sconto extra ai clienti speciali - isAmbassador
+//5. Stampa o ritorna il risultato finale - totale carrello e shipping cost se incluso o no
+
 const marco = {
   name: "Marco",
   lastName: "Rossi",
@@ -34,25 +40,59 @@ const amy = {
   isAmbassador: false,
 };
 
+// Crea una nuova lista di utenti e un nuovo array con tutti gli utenti inclusi nello sconto isAmbassador
+let utenti = [marco, paul, amy];
+let indice = utenti.push(
+  {
+    name: "Sam",
+    lastName: "Storm",
+    isAmbassador: true,
+  },
+  {
+    name: "Fred",
+    lastName: "Green",
+    isAmbassador: false,
+  }
+);
+console.log(utenti);
+
+let subscription = prompt("Inserisci la proprieta'");
+if (subscription in utenti) {
+  console.log(
+    `Il valore attuale di ${subscription} e' ${utenti[subscription]}`
+  );
+} else {
+  console.log("Non esiste");
+}
+
 const prices = [34, 5, 2];
 const shippingCost = 50;
+//let addedPrices = prices.push(34, 41);
+//console.log(addedPrices);
 let utenteCheEffettuaLAcquisto = amy; //cambia il valore qui per provare se il tuo algoritmo funziona!
 
-function calcolaCheckOut(prices, shippingCost) {
-  console.log(calcolaCheckOut);
-  const discountCost = 100;
-  let totaleCarrello = calcolaTotaleCarrello(prices);
-  let risultato = `Saldo totale: ${totaleCarrello}`;
-}
-
-function calcolaTotaleCarrello(prices) {
+function checkout(prices) {
   if (!prices) return;
-  let totaleCarrello = 0;
+
+  //somma degli elementi compresi nell'array e calcolo finale del carrello senza sconti //
+  let cartTotal = 0;
   for (let i = 0; i < prices.length; i++) {
-    totaleCarrello += prices[1];
+    cartTotal += prices[i];
   }
-  return totaleCarrello;
+  console.log("Il totale del tuo acquisto e'" + cartTotal + "$");
+
+  // aggiungi alla somma il costo di spedizione - <=100 //
+  const minShippingPrice = 100;
+
+  if (cartTotal >= minShippingPrice) {
+    console.log("Spedizione gratuita inclusa!");
+  } else {
+    console.log("+ costi di spedizione:" + shippingCost + "$");
+    cartTotal += shippingCost;
+    console.log(cartTotal);
+  }
+
+  return cartTotal;
 }
 
-let risultatoFinale = checkout;
-let checkout = calcolaCheckOut(prices, shippingCost);
+let cartCheckout = checkout(prices);
