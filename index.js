@@ -37,3 +37,22 @@ const amy = {
 const prices = [34, 5, 2];
 const shippingCost = 50;
 let utenteCheEffettuaLAcquisto = amy; //cambia il valore qui per provare se il tuo algoritmo funziona!
+
+function calcolaCheckOut(prices, shippingCost) {
+  console.log(calcolaCheckOut);
+  const discountCost = 100;
+  let totaleCarrello = calcolaTotaleCarrello(prices);
+  let risultato = `Saldo totale: ${totaleCarrello}`;
+}
+
+function calcolaTotaleCarrello(prices) {
+  if (!prices) return;
+  let totaleCarrello = 0;
+  for (let i = 0; i < prices.length; i++) {
+    totaleCarrello += prices[1];
+  }
+  return totaleCarrello;
+}
+
+let risultatoFinale = checkout;
+let checkout = calcolaCheckOut(prices, shippingCost);
