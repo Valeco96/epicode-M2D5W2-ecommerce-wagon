@@ -40,36 +40,52 @@ const amy = {
   isAmbassador: false,
 };
 
-// Crea una nuova lista di utenti e un nuovo array con tutti gli utenti inclusi nello sconto isAmbassador
-let utenti = [marco, paul, amy];
+// Crea un nuovo array con tutti gli utenti
+let utenti = [];
 let indice = utenti.push(
-  {
+  marco,
+  paul,
+  amy,
+  (sam = {
     name: "Sam",
     lastName: "Storm",
     isAmbassador: true,
-  },
-  {
+  }),
+  (fred = {
     name: "Fred",
     lastName: "Green",
     isAmbassador: false,
-  }
+  })
 );
+
 console.log(utenti);
 
-let subscription = prompt("Inserisci la proprieta'");
-if (subscription in utenti) {
-  console.log(
-    `Il valore attuale di ${subscription} e' ${utenti[subscription]}`
-  );
-} else {
-  console.log("Non esiste");
+// Stampa la frase é/non e' un ambassador
+for (let i = 0; i < utenti.length; i++) {
+  let utente = utenti[i];
+  if (utente.isAmbassador) {
+    console.log(`L'utente ${utente.name} ${utente.lastName} e' un Ambassador`);
+  } else {
+    console.log(
+      `L'utente ${utente.name} ${utente.lastName} non e' un Ambassador`
+    );
+  }
 }
+
+// Crea un nuovo array solo con gli ambassador
+let utentiAmbassador = [];
+for (let utente of utenti) {
+  if (utente.isAmbassador) {
+    utentiAmbassador.push(utente);
+  }
+}
+console.log(utentiAmbassador);
 
 const prices = [34, 5, 2];
 const shippingCost = 50;
 //let addedPrices = prices.push(34, 41);
 //console.log(addedPrices);
-let utenteCheEffettuaLAcquisto = amy; //cambia il valore qui per provare se il tuo algoritmo funziona!
+let utenteCheEffettuaLAcquisto = paul; //cambia il valore qui per provare se il tuo algoritmo funziona!
 
 function checkout(prices) {
   if (!prices) return;
@@ -81,17 +97,26 @@ function checkout(prices) {
   }
   console.log("Il totale del tuo acquisto e'" + cartTotal + "$");
 
-  // aggiungi alla somma il costo di spedizione - <=100 //
-  const minShippingPrice = 100;
-
-  if (cartTotal >= minShippingPrice) {
-    console.log("Spedizione gratuita inclusa!");
+  //Applica sconto agli utenti ambassador
+  if (utenteCheEffettuaLAcquisto) {
+    console.log("Bentornato/a! Applico uno sconto del 30%!");
+    cartTotal = cartTotal * 30 - 100;
   } else {
-    console.log("+ costi di spedizione:" + shippingCost + "$");
-    cartTotal += shippingCost;
-    console.log(cartTotal);
+    console.log("Nessuno sconto applicato");
+
+    // aggiungi alla somma il costo di spedizione - <=100 //
+    const minShippingPrice = 100;
+
+    if (cartTotal >= minShippingPrice) {
+      console.log("Spedizione gratuita inclusa!");
+    } else {
+      console.log("+ costi di spedizione:" + shippingCost + "$");
+      cartTotal += shippingCost;
+      console.log(cartTotal);
+    }
   }
 
+  console.log(`Il costo totale del suo acquisto e' di ${cartTotal} $`);
   return cartTotal;
 }
 
